@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="cn.yht.simpleOA.model">
+
+	<class name="User" table="oa_user">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="loginName"/>
+		<property name="password"/>
+		<property name="name"/>
+
+		<!--roles属性，本类与User多对多-->
+		<set name="roles" table="oa_user_role" lazy="false">
+			<key column="userId"/>
+			<many-to-many class="Role" column="roleId"/>
+		</set>
+
+		<!--overtimes 属性，本类与 Overtime 一对多-->
+		<set name="overtimes">
+			<key column="userId"/>
+			<one-to-many class="Overtime"/>
+		</set>
+
+
+
+		<!--preOvertimes 属性，本类与 PreOvertime 一对多-->
+		<set name="preOvertimes">
+			<key column="userId"/>
+			<one-to-many class="PreOvertime"/>
+		</set>
+
+		<!--breaktimes 属性，本类与 Breaktime 一对多-->
+		<set name="breaktimes">
+			<key column="userId"/>
+			<one-to-many class="Breaktime"/>
+		</set>
+
+		<!--overtimeCounts 属性，本类与 OvertimeCount 一对多-->
+		<set name="overtimeCounts">
+			<key column="userId"/>
+			<one-to-many class="OvertimeCount"/>
+		</set>
+	</class>
+</hibernate-mapping>

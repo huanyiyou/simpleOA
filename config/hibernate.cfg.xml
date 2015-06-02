@@ -1,0 +1,26 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="connection.url" >jdbc:sqlserver://localhost:1433;DatabaseName=simpleOA</property>
+		<property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+		<property name="connection.username">sa</property>
+		<property name="connection.password">bksy</property>
+		<property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+
+		<property name="hbm2ddl.auto">update</property>
+
+		<mapping resource="cn/yht/simpleOA/model/User.hbm.xml"/>
+		<mapping resource="cn/yht/simpleOA/model/Role.hbm.xml"/>
+		<mapping resource="cn/yht/simpleOA/model/Privilege.hbm.xml"/>
+		<mapping resource="cn/yht/simpleOA/model/Overtime.hbm.xml"/>
+		<mapping resource="cn/yht/simpleOA/model/OvertimeCount.hbm.xml"/>
+		<mapping resource="cn/yht/simpleOA/model/PreOvertime.hbm.xml"/>
+		<mapping resource="cn/yht/simpleOA/model/Breaktime.hbm.xml"/>
+		<mapping resource="cn/yht/simpleOA/model/BreaktimeCount.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="cn.yht.simpleOA.model">
+
+	<class name="PreOvertime" table="oa_preOvertime">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="date"/>
+		<property name="startTime"/>
+		<property name="endTime"/>
+		<property name="timeSpan"/>
+		<property name="userName"/>
+		<property name="description" type="text" length="65536"/>
+		<property name="creatTime"/>
+		<property name="updateTime"/>
+		<property name="year"/>
+		<property name="month"/>
+		<property name="remark" type="text" length="65536"/>
+		<property name="approved"/>
+		<property name="submitted"/>
+		<property name="type"/>
+
+		<!--user属性，本类与User多对一-->
+		<many-to-one name="user" column="userId" class="User"/>
+
+	</class>
+</hibernate-mapping>
