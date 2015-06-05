@@ -25,29 +25,21 @@ public class OvertimeServiceImpl extends DaoSupportImpl<Overtime>  implements Ov
     }
 
     @Override
-    public Double[] getSumByUserIdAndYear(Long userId, String year) {
+    public double[] getSumByUserIdAndYear(Long userId, String year) {
         List<Overtime> overtimes = getSession().createQuery(
                 "FROM Overtime o WHERE o.user.id = :userId AND o.year = :year")
                 .setParameter("userId", userId)
                 .setParameter("year", year)
                 .list();
-        Double[] result = new Double[12];
+        double[] result = new double[12];
         if (overtimes.size() > 0) {
             for (Overtime o : overtimes) {
                 if (o.getMonth().startsWith("0")) {
                     int index = Integer.parseInt(o.getMonth().substring(1)) - 1;
-                    if(null != result[index]){
-                        result[index] += TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
-                    }else {
-                        result[index] = TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
-                    }
+                    result[index] += TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
                 } else {
                     int index = Integer.parseInt(o.getMonth()) - 1;
-                    if(null != result[index]){
-                        result[index] += TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
-                    }else {
-                        result[index] = TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
-                    }
+                    result[index] += TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
                 }
             }
         }
@@ -55,28 +47,20 @@ public class OvertimeServiceImpl extends DaoSupportImpl<Overtime>  implements Ov
     }
 
     @Override
-    public Double[] getSumByYear(String year) {
+    public double[] getSumByYear(String year) {
         List<Overtime> overtimes = getSession().createQuery(
                 "FROM Overtime o WHERE o.year = :year")
                 .setParameter("year", year)
                 .list();
-        Double[] result = new Double[12];
+        double[] result = new double[12];
         if (overtimes.size() > 0) {
             for (Overtime o : overtimes) {
                 if (o.getMonth().startsWith("0")) {
                     int index = Integer.parseInt(o.getMonth().substring(1)) - 1;
-                    if(null != result[index]){
-                        result[index] += TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
-                    }else {
-                        result[index] = TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
-                    }
+                    result[index] += TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
                 } else {
                     int index = Integer.parseInt(o.getMonth()) - 1;
-                    if(null != result[index]){
-                        result[index] += TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
-                    }else {
-                        result[index] = TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
-                    }
+                    result[index] += TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
                 }
             }
         }

@@ -23,8 +23,8 @@ public class StatsController extends BaseAction {
     @RequestMapping("/department")
     public String department(Model model,Long userId, String year){
         DecimalFormat df = new DecimalFormat("#.###");
-        Double[] overtimes = new Double[12];
-        Double[] breaktimes = new Double[12];
+        double[] overtimes;
+        double[] breaktimes;
         if(null != userId && null!= year && !"".equals(year) && userId != 0){
             overtimes = overtimeService.getSumByUserIdAndYear(userId, year);
             breaktimes = breaktimeService.getSumByUserIdAndYear(userId, year);
@@ -40,17 +40,13 @@ public class StatsController extends BaseAction {
         model.addAttribute("breaktimes", breaktimes);
 
         //计算年度数据
-        Double overtimeSum = 0.0;
-        Double breaktimeSum = 0.0;
-        for(Double ot :overtimes){
-            if(null != ot){
-                overtimeSum += ot;
-            }
+        double overtimeSum = 0.0;
+        double breaktimeSum = 0.0;
+        for(double ot :overtimes){
+            overtimeSum += ot;
         }
-        for(Double bt : breaktimes){
-            if(null != bt){
-                breaktimeSum += bt;
-            }
+        for(double bt : breaktimes){
+            breaktimeSum += bt;
         }
 
         model.addAttribute("overtimeSum", df.format(overtimeSum));
@@ -66,8 +62,8 @@ public class StatsController extends BaseAction {
     @RequestMapping("/user")
     public String user(Model model, String year, HttpSession session){
         DecimalFormat df = new DecimalFormat("#.###");
-        Double[] overtimes = new Double[12];
-        Double[] breaktimes = new Double[12];
+        double[] overtimes;
+        double[] breaktimes;
         Long userId = ((User)session.getAttribute("user")).getId();
         if( null == year || "".equals(year)){
             year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));

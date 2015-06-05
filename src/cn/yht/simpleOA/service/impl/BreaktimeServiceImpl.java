@@ -15,32 +15,22 @@ import java.util.List;
 @Transactional
 public class BreaktimeServiceImpl extends DaoSupportImpl<Breaktime> implements BreaktimeService {
     @Override
-    public Double[] getSumByUserIdAndYear(Long userId, String year) {
+    public double[] getSumByUserIdAndYear(Long userId, String year) {
         List<Breaktime> breaktimes = getSession().createQuery(
                 "FROM Breaktime b WHERE b.user.id = :userId AND b.year = :year")
                 .setParameter("userId", userId)
                 .setParameter("year", year)
                 .list();
-        Double[] result = new Double[12];
+        double[] result = new double[12];
         if(breaktimes.size() > 0){
             for(Breaktime b : breaktimes){
                 if(b.getMonth().startsWith("0")){
                     int index = Integer.parseInt(b.getMonth().substring(1)) - 1;
-                    if(null != result[index]){
-                        result[index] += b.getDuration();
-                    }
-                    else {
-                        result[index] = b.getDuration();
-                    }
+                    result[index] += b.getDuration();
                 }
                 else {
                     int index = Integer.parseInt(b.getMonth()) - 1;
-                    if(null != result[index]){
-                        result[index] += b.getDuration();
-                    }
-                    else {
-                        result[index] = b.getDuration();
-                    }
+                    result[index] += b.getDuration();
                 }
             }
         }
@@ -48,31 +38,21 @@ public class BreaktimeServiceImpl extends DaoSupportImpl<Breaktime> implements B
     }
 
     @Override
-    public Double[] getSumByYear(String year) {
+    public double[] getSumByYear(String year) {
         List<Breaktime> breaktimes = getSession().createQuery(
                 "FROM Breaktime b WHERE b.year = :year")
                 .setParameter("year", year)
                 .list();
-        Double[] result = new Double[12];
+        double[] result = new double[12];
         if(breaktimes.size() > 0){
             for(Breaktime b : breaktimes){
                 if(b.getMonth().startsWith("0")){
                     int index = Integer.parseInt(b.getMonth().substring(1)) - 1;
-                    if(null != result[index]){
-                        result[index] += b.getDuration();
-                    }
-                    else {
-                        result[index] = b.getDuration();
-                    }
+                    result[index] += b.getDuration();
                 }
                 else {
                     int index = Integer.parseInt(b.getMonth()) - 1;
-                    if(null != result[index]){
-                        result[index] += b.getDuration();
-                    }
-                    else {
-                        result[index] = b.getDuration();
-                    }
+                    result[index] += b.getDuration();
                 }
             }
         }

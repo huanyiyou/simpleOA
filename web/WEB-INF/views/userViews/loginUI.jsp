@@ -34,11 +34,8 @@
           <label for="aa" ><img border="0" src="${pageContext.request.contextPath}/style/blue/images/login/password.gif" /></label>
           <input type="password" name="password" id="aa" size="20" tabindex="2"  class="TextField required"/>
         </div>
-
         <input type="image" tabindex="3" src="${pageContext.request.contextPath}/style/blue/images/login/userLogin_button.gif" />
-
-        <a>${message}</a>
-
+        <a style="color: yellow">${message}</a>
       </div>
       <div id="CopyRight"><a href="javascript:void(0)">&copy; 2015 版权所有 </a></div>
     </div>

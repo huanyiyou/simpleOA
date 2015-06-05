@@ -24,8 +24,8 @@ import java.util.List;
 public class ChartController extends BaseAction{
     @RequestMapping("/department")
     public String departmentView(Model model,Long userId, String year){
-        Double[] overtimes = new Double[12];
-        Double[] breaktimes = new Double[12];
+        double[] overtimes;
+        double[] breaktimes;
         if(null == year || "".equals(year)){
             year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
         }
@@ -62,8 +62,8 @@ public class ChartController extends BaseAction{
 
     @RequestMapping("/user")
     public String userView(Model model, String year, HttpServletRequest request){
-        Double[] overtimes = new Double[12];
-        Double[] breaktimes = new Double[12];
+        double[] overtimes;
+        double[] breaktimes;
         if(null == year || "".equals(year)){
             year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
         }
