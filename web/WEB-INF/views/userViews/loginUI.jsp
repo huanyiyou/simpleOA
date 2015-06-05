@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/public/commons.jspf" %>
 <html>
 <head>
-  <title>simpleOA</title>
+  <title>加班系统</title>
   <link href="${pageContext.request.contextPath}/style/blue/login.css" type=text/css rel=stylesheet>
   <script type="text/javascript">
     $(function(){
@@ -26,26 +26,19 @@
     <div id="CenterArea">
       <div id="LogoImg"><img border="0" src="${pageContext.request.contextPath}/style/blue/images/logo.png" /></div>
       <div id="LoginInfo">
-        <table BORDER=0 CELLSPACING=0 CELLPADDING=0 width=100%>
-          <tr>
-            <td colspan="3"><!-- 显示错误 -->
-              <font color="red"><form:errors/></font>
-            </td>
-          </tr>
-          <tr>
-            <td width=45 class="Subject"><img border="0" src="${pageContext.request.contextPath}/style/blue/images/login/userId.gif" /></td>
-            <td>
-              <input type="text" name="loginName" size="20" tabindex="1" cssClass="TextField required" id="loginNameInput"/>
-            </td>
-            <td rowspan="2" style="padding-left:10px;">
-              <input type="image" tabindex="3" src="${pageContext.request.contextPath}/style/blue/images/login/userLogin_button.gif" />
-            </td>
-          </tr>
-          <tr>
-            <td class="Subject"><img border="0" src="${pageContext.request.contextPath}/style/blue/images/login/password.gif" /></td>
-            <td><input type="password" name="password" id="aa" size="20" tabindex="2" showPassword="false" cssClass="TextField required"/></td>
-          </tr>
-        </table>
+        <div>
+          <label for="loginNameInput"> <img border="0" src="${pageContext.request.contextPath}/style/blue/images/login/userId.gif"/></label>
+          <input type="text" name="loginName" size="20" tabindex="1" class="TextField required" id="loginNameInput"/>
+        </div>
+        <div>
+          <label for="aa" ><img border="0" src="${pageContext.request.contextPath}/style/blue/images/login/password.gif" /></label>
+          <input type="password" name="password" id="aa" size="20" tabindex="2"  class="TextField required"/>
+        </div>
+
+        <input type="image" tabindex="3" src="${pageContext.request.contextPath}/style/blue/images/login/userLogin_button.gif" />
+
+        <a>${message}</a>
+
       </div>
       <div id="CopyRight"><a href="javascript:void(0)">&copy; 2015 版权所有 </a></div>
     </div>

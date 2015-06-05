@@ -10,4 +10,8 @@ import java.util.List;
  */
 public interface OvertimeService extends DaoSupport<Overtime> {
     List<Overtime> findAllByUserId(Long user);
+
+    Double[] getSumByUserIdAndYear(Long userId, String year);
+
+    Double[] getSumByYear(String year);
 }

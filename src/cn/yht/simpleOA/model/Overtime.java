@@ -1,12 +1,19 @@
 package cn.yht.simpleOA.model;
 
 
+import cn.yht.simpleOA.service.UserService;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import javax.annotation.Resource;
 import java.io.Serializable;
 
 /**
  * Created by YHT on 2015/5/19.
  */
 public class Overtime implements Serializable {
+    @Resource
+    private UserService userService;
+
     private Long id;
 
     //加班日期
@@ -42,6 +49,25 @@ public class Overtime implements Serializable {
 
     private User user;
 
+
+    public Overtime() {
+    }
+
+    public Overtime(String date, String startTime, String endTime, String timeSpan, String userName,User user, String description, String creatTime, String updateTime, String year, String month, String remark) {
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.timeSpan = timeSpan;
+        this.userName = userName;
+        this.description = description;
+        this.creatTime = creatTime;
+        this.updateTime = updateTime;
+        this.year = year;
+        this.month = month;
+        this.remark = remark;
+        this.user = user;
+        this.type = 1;
+    }
 
     public Long getId() {
         return id;
@@ -154,4 +180,5 @@ public class Overtime implements Serializable {
     public void setType(int type) {
         this.type = type;
     }
+
 }

@@ -2,7 +2,7 @@
 <%@include file="/WEB-INF/views/public/commons.jspf"%>
 <html>
 <head>
-  <title>休假记录列表</title>
+  <title>休假记录</title>
 </head>
 <body>
 
@@ -16,7 +16,7 @@
   </div>
 </div>
 <form action="/selfBreaktime/list">
-  <input hidden="hidden" name="pageNum" value="1"/>
+  <input hidden="hidden" name="pageNum" value="${pageNum}"/>
   年：
   <select name="year">
     <option value="" <c:if test="${year == ''}">selected</c:if>>所有年份</option>
@@ -42,7 +42,7 @@
       <th>使用人</th>
       <th>时长</th>
       <th>日期</th>
-      <th>工作描述</th>
+      <th>描述</th>
       <th>相关操作</th>
     </tr>
 

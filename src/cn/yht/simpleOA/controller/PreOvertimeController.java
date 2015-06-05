@@ -2,7 +2,6 @@ package cn.yht.simpleOA.controller;
 
 import cn.yht.simpleOA.base.BaseAction;
 import cn.yht.simpleOA.model.Overtime;
-import cn.yht.simpleOA.model.OvertimeCount;
 import cn.yht.simpleOA.model.PreOvertime;
 import cn.yht.simpleOA.model.User;
 import cn.yht.simpleOA.util.QueryHelper;
@@ -11,7 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
@@ -128,21 +126,9 @@ public class PreOvertimeController extends BaseAction {
         overtime.setYear(preOvertimeInDatabase.getYear());
         overtime.setMonth(preOvertimeInDatabase.getMonth());
         overtime.setUser(preOvertimeInDatabase.getUser());
+        overtime.setType(preOvertimeInDatabase.getType());
         overtimeService.save(overtime);
 
-        //更新overtimeCount
-        //判断overtimeCount表中是否含有该年月的纪录
-        Long overtimeCountId = overtimeCountService.getSameUYMId(overtime.getUser().getId(), overtime.getYear(), overtime.getMonth());
-        if (null != overtimeCountId) {
-            //若有则更新
-            OvertimeCount overtimeCount = overtimeCountService.getById(overtimeCountId);
-            overtimeCount.setHours(overtimeCount.getHours() + TimeHandler.getHoursByTimeSpan(overtime.getTimeSpan()));
-            overtimeCountService.update(overtimeCount);
-        } else {
-            //若无则添加
-            OvertimeCount overtimeCount = new OvertimeCount(overtime.getYear(), overtime.getMonth(), TimeHandler.getHoursByTimeSpan(overtime.getTimeSpan()), overtime.getUser());
-            overtimeCountService.save(overtimeCount);
-        }
 
         return "redirect:/preOvertime/list";
     }

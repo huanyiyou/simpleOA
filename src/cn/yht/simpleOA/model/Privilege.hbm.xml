@@ -23,10 +23,11 @@
 
 
 		<!--children属性，本类与Privilege一对多-->
-		<set name="children" lazy="false">
+		<bag name="children" order-by="id asc" lazy="false">
 			<key column="parentId"/>
 			<one-to-many class="Privilege" />
-		</set>
+		</bag>
+
 
 	</class>
 </hibernate-mapping>

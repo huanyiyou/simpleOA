@@ -13,6 +13,28 @@
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/script/bootstrap/locales/bootstrap-datetimepicker.zh-CN.js"
             charset="UTF-8"></script>
+    <script language="javascript" type="text/javascript">
+        function check(){
+            if(document.getElementById("date").value == "" || document.getElementById("duration").value == ""){
+                alert("日期和小时不能为空！");
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+        function clearNoNum(obj)
+        {
+            //先把非数字的都替换掉，除了数字和.
+            obj.value = obj.value.replace(/[^\d.]/g,"");
+            //必须保证第一个为数字而不是.
+            obj.value = obj.value.replace(/^\./g,"");
+            //保证只有出现一个.而没有多个.
+            obj.value = obj.value.replace(/\.{2,}/g,".");
+            //保证.只出现一次，而不能出现两次以上
+            obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+        }
+    </script>
 </head>
 <body>
 
@@ -28,7 +50,7 @@
     </div>
 </div>
 <div id="MainArea">
-    <form:form action="${id == null ? 'add' : 'edit'}" modelAttribute="breaktime" method="post" cssClass="form-horizontal">
+    <form:form action="${id == null ? 'add' : 'edit'}" modelAttribute="breaktime" method="post" cssClass="form-horizontal" onsubmit="return check()">
         <form:hidden path="id"/>
         <div class="ItemBlock_Title1"><!-- 信息说明<DIV CLASS="ItemBlock_Title1">
         	<IMG BORDER="0" WIDTH="4" HEIGHT="7" SRC="${pageContext.request.contextPath}/style/blue/images/item_point.gif" /> 岗位信息 </DIV>  -->
@@ -60,7 +82,7 @@
                     <label class="col-md-2 control-label">小时</label>
 
                     <div class="input-group col-md-5">
-                        <form:input path="duration" cssClass="InputStyle"/>
+                        <form:input path="duration" cssClass="InputStyle" onkeyup="clearNoNum(this)"/>
                     </div>
                 </div>
 
@@ -95,6 +117,7 @@
         minView: 2,
         forceParse: 0
     });
+
 </script>
 
 

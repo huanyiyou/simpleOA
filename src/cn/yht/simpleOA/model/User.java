@@ -22,7 +22,6 @@ public class User implements Serializable {
     private Set<Overtime> overtimes = new HashSet<>();
     private Set<PreOvertime> preOvertimes = new HashSet<>();
     private Set<Breaktime> breaktimes = new HashSet<>();
-    private Set<OvertimeCount> overtimeCounts = new HashSet<>();
 
 
 
@@ -67,7 +66,7 @@ public class User implements Serializable {
     }
 
     private boolean isCommonPrivileges(String url){
-        if(url.startsWith("/user/login") || url.startsWith("/home") || url.startsWith("/user/setting")){
+        if(url.startsWith("/user/log") || url.startsWith("/home") || url.startsWith("/user/setting")){
             return true;
         }else {
             return false;
@@ -165,13 +164,5 @@ public class User implements Serializable {
 
     public void setBreaktimes(Set<Breaktime> breaktimes) {
         this.breaktimes = breaktimes;
-    }
-
-    public Set<OvertimeCount> getOvertimeCounts() {
-        return overtimeCounts;
-    }
-
-    public void setOvertimeCounts(Set<OvertimeCount> overtimeCounts) {
-        this.overtimeCounts = overtimeCounts;
     }
 }

@@ -23,7 +23,7 @@ public class CheckPrivilegeInterceptor extends HandlerInterceptorAdapter {
         System.out.println(">>>: " + "----------------preHandle------------------");
         System.out.println(">>>:uri " + uri);
         if(null == user){
-            if(uri.startsWith("/user/login") ){
+            if(uri.startsWith("/user/log") ){
                 return true;
             }else {
                 httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/user/loginUI");

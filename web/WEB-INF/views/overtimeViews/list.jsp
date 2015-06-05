@@ -2,7 +2,7 @@
 <%@include file="/WEB-INF/views/public/commons.jspf"%>
 <html>
 <head>
-  <title>部门加班记录列表</title>
+  <title>部门加班列表</title>
 </head>
 <body>
 
@@ -10,7 +10,7 @@
   <div id="Title_bar_Head">
     <div id="Title_Head"></div>
     <div id="Title"><!--页面标题-->
-      <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 部门加班记录
+      <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 部门加班列表
     </div>
     <div id="Title_End"></div>
   </div>
@@ -43,7 +43,7 @@
   </form>
 </div>
 <div id="MainArea">
-  <table cellspacing="0" cellpadding="0" >
+  <table cellpadding="0" cellspacing="0" >
 
     <!-- 表头-->
     <tr>
@@ -69,13 +69,13 @@
         </td>
         <td>
           <c:choose>
-            <c:when test="${preOvertime.type == 1}">
+            <c:when test="${overtime.type == 1}">
               工作日
             </c:when>
-            <c:when test="${preOvertime.type == 2}">
+            <c:when test="${overtime.type == 2}">
               双休日
             </c:when>
-            <c:when test="${preOvertime.type == 3}">
+            <c:when test="${overtime.type == 3}">
               国定假日
             </c:when>
           </c:choose>

@@ -24,8 +24,4 @@ public abstract class BaseAction {
     protected PreOvertimeService preOvertimeService;
     @Resource
     protected BreaktimeService breaktimeService ;
-    @Resource
-    protected OvertimeCountService overtimeCountService;
-    @Resource
-    protected BreaktimeCountService breaktimeCountService;
 }

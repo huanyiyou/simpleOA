@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>部门统计图表</title>
+    <title>部门统计图</title>
     <%@include file="/WEB-INF/views/public/commons.jspf" %>
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/script/fusioncharts/js/fusioncharts.js"></script>
@@ -20,9 +20,10 @@
                         "caption": "加班与休假统计",
                         "subCaption": "${year} 年 ${userName}",
                         "xAxisname": "月份",
-                        "yAxisName": "市场 (小时)",
+                        "yAxisName": "单位(小时)",
 //                        "numberPrefix": "h",
-                        "numberSuffix":"小时",
+//                        "numberSuffix":"小时",
+                        "showValues": "1",
                         "theme": "fint"
                     },
                     "categories": [
@@ -163,7 +164,7 @@
     <div id="Title_bar_Head">
         <div id="Title_Head"></div>
         <div id="Title"><!--页面标题-->
-            <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 部门统计图表
+            <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 部门统计图
         </div>
         <div id="Title_End"></div>
     </div>

@@ -1,7 +1,12 @@
 package cn.yht.simpleOA.model;
 
+import cn.yht.simpleOA.service.PrivilegeService;
+
+import javax.annotation.Resource;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -14,7 +19,8 @@ public class Privilege implements Serializable {
 
     private Set<Role> roles = new HashSet<>();
     private Privilege parent;
-    private Set<Privilege> children = new HashSet<>();
+    private List<Privilege> children = new ArrayList<>();
+
 
     public Long getId() {
         return id;
@@ -65,11 +71,11 @@ public class Privilege implements Serializable {
         this.parent = parent;
     }
 
-    public Set<Privilege> getChildren() {
+    public List<Privilege> getChildren() {
         return children;
     }
 
-    public void setChildren(Set<Privilege> children) {
+    public void setChildren(List<Privilege> children) {
         this.children = children;
     }
 }

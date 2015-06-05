@@ -12,7 +12,7 @@
 <div id="Head1">
   <div id="Logo">
     <a id="msgLink" href="javascript:void(0)"></a>
-    <font color="#0000CC" style="color:#F1F9FE; font-size:28px; font-family:Arial Black, Arial">OA</font>
+    <font color="#0000CC" style="color:#F1F9FE; font-size:28px; font-family:Arial Black, Arial">加班系统</font>
     <!--<img border="0" src="style/blue/images/logo.png" />-->
   </div>
 

@@ -2,7 +2,7 @@
 <%@include file="/WEB-INF/views/public/commons.jspf"%>
 <html>
 <head>
-  <title>个人加班记录列表</title>
+  <title>加班记录</title>
 </head>
 <body>
 
@@ -10,13 +10,13 @@
   <div id="Title_bar_Head">
     <div id="Title_Head"></div>
     <div id="Title"><!--页面标题-->
-      <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 个人加班记录
+      <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 加班记录
     </div>
     <div id="Title_End"></div>
   </div>
 </div>
 <div>
-  <form action="/overtime/list">
+  <form action="/selfOvertime/list">
     <input hidden="hidden" name="pageNum" value="${pageNum}"/>
     年：
     <select name="year">

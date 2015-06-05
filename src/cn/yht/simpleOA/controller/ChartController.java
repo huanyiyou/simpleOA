@@ -1,6 +1,7 @@
 package cn.yht.simpleOA.controller;
 
 import cn.yht.simpleOA.base.BaseAction;
+import cn.yht.simpleOA.model.Overtime;
 import cn.yht.simpleOA.model.User;
 import cn.yht.simpleOA.util.TimeHandler;
 import org.springframework.context.annotation.Scope;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 
 /**
@@ -30,13 +32,13 @@ public class ChartController extends BaseAction{
        if(null == userId || userId == 0){
            //如果是所有人
            userId = (long) 0;
-           overtimes = overtimeCountService.getTimeByYear(year);
-           breaktimes = breaktimeCountService.getTimeByYear(year);
+           overtimes = overtimeService.getSumByYear(year);
+           breaktimes = breaktimeService.getSumByYear(year);
        }
         else {
            //如果指定userId
-           overtimes = overtimeCountService.getTimeByUserIdAndYear(userId, year);
-           breaktimes = breaktimeCountService.getTimeByUserIdAndYear(userId, year);
+           overtimes = overtimeService.getSumByUserIdAndYear(userId, year);
+           breaktimes = breaktimeService.getSumByUserIdAndYear(userId, year);
         }
         model.addAttribute("overtimes", overtimes);
         model.addAttribute("breaktimes", breaktimes);
@@ -65,8 +67,8 @@ public class ChartController extends BaseAction{
         if(null == year || "".equals(year)){
             year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
         }
-        overtimes = overtimeCountService.getTimeByUserIdAndYear(((User)request.getSession().getAttribute("user")).getId(), year);
-        breaktimes = breaktimeCountService.getTimeByUserIdAndYear(((User) request.getSession().getAttribute("user")).getId(), year);
+        overtimes = overtimeService.getSumByUserIdAndYear(((User)request.getSession().getAttribute("user")).getId(), year);
+        breaktimes = breaktimeService.getSumByUserIdAndYear(((User) request.getSession().getAttribute("user")).getId(), year);
         model.addAttribute("overtimes", overtimes);
         model.addAttribute("breaktimes", breaktimes);
 

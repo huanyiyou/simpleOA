@@ -7,6 +7,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by admin on 2015/5/13.
  */
@@ -20,5 +22,15 @@ public class UserServiceImpl extends DaoSupportImpl<User> implements UserService
                 .setParameter("loginName", loginName)
                 .setParameter("password", md5Digest)
                 .uniqueResult();
+    }
+
+    @Override
+    public boolean hasSameLoginName(User user) {
+        List<User> users = getSession().createQuery("FROM User u WHERE u.loginName = :loginName").setParameter("loginName", user.getLoginName()).list();
+        if(users.size() > 0){
+            return true;
+        }else {
+            return false;
+        }
     }
 }

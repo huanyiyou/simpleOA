@@ -43,27 +43,30 @@
 <div>
   <h1>更改密码</h1>
 
-  <div>
-    ${message}
-  </div>
-  <form name="form1" action="/user/setting">
+  <form name="form1" action="/user/setting" onsubmit="return check()">
     <fieldset>
-      <legend>更改密码</legend>
-      <ol>
-        <li>
-          <label for="currentPassword">当前密码</label>
-          <input type="password" name="currentPassword" id="currentPassword">
-        </li>
-        <li>
-          <label for="newPassword">新密码</label>
-          <input type="password" name="newPassword" id="newPassword">
-        </li>
-        <li>
-          <label for="confirmPassword">确认新密码</label>
-          <input type="password" name="confirmPassword" id="confirmPassword">
-        </li>
-      </ol>
-      <input type="submit" value="更改密码" onClick="return check()"/>
+      <table>
+        <tr>
+          <td></td>
+          <td>${message}</td>
+        </tr>
+        <tr>
+          <td><label for="currentPassword">当前密码</label></td>
+          <td><input type="password" name="currentPassword" id="currentPassword"></td>
+        </tr>
+        <tr>
+          <td><label for="newPassword">新密码</label></td>
+          <td><input type="password" name="newPassword" id="newPassword"></td>
+        </tr>
+        <tr>
+          <td> <label for="confirmPassword">确认新密码</label></td>
+          <td><input type="password" name="confirmPassword" id="confirmPassword"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="submit" value="更改密码" /></td>
+        </tr>
+      </table>
     </fieldset>
   </form>
 

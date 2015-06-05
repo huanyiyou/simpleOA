@@ -46,6 +46,27 @@ public class PreOvertime implements Serializable {
     private boolean approved;
     private boolean submitted;
 
+    public PreOvertime() {
+    }
+
+    public PreOvertime(String date, String startTime, String endTime, String timeSpan, String userName,User user, String description, String creatTime, String updateTime, String year, String month, String remark, int approved, int submitted) {
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.timeSpan = timeSpan;
+        this.userName = userName;
+        this.description = description;
+        this.creatTime = creatTime;
+        this.updateTime = updateTime;
+        this.year = year;
+        this.month = month;
+        this.remark = remark;
+        this.type = 1;
+        this.user = user;
+        this.approved = (approved == 1);
+        this.submitted = (submitted == 1);
+    }
+
     public Long getId() {
         return id;
     }

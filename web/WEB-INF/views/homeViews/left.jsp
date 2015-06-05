@@ -16,7 +16,7 @@
         <c:forEach items="${applicationScope.privilegeTopList}" var="privilege">
            <c:if test="${sessionScope.user.hasPrivilegeByName(privilege.name)}">
             <li class="level1">
-                <div onClick="menuClick(this)" class="level1Style"><img src="${pageContext.request.contextPath}/style/images/MenuIcon/${privilege.id}.gif"
+                <div onClick="menuClick(this)" class="level1Style"><img src="${pageContext.request.contextPath}/style/images/MenuIcon/${privilege.id}.ico"
                                                                         class="Icon"/>
                         ${privilege.name}
                 </div>

@@ -63,6 +63,7 @@ public class OvertimeController extends BaseAction {
                 .addCondition("o.month LIKE :month","%"+ month+"%")
                 .addCondition("o.userName LIKE :userName" ,"%"+ userName+"%")
                 .preparePageBean(overtimeService, pageNum, model);
+        model.addAttribute("pageNum", pageNum);
         model.addAttribute("year", year);
         model.addAttribute("years", TimeHandler.getYears());
         model.addAttribute("month", month);

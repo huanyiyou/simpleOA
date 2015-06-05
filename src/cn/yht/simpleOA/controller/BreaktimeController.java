@@ -2,7 +2,6 @@ package cn.yht.simpleOA.controller;
 
 import cn.yht.simpleOA.base.BaseAction;
 import cn.yht.simpleOA.model.Breaktime;
-import cn.yht.simpleOA.model.BreaktimeCount;
 import cn.yht.simpleOA.model.User;
 import cn.yht.simpleOA.util.QueryHelper;
 import cn.yht.simpleOA.util.TimeHandler;
@@ -10,7 +9,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -74,19 +72,6 @@ public class BreaktimeController extends BaseAction {
         breaktimeService.save(breaktime);
 
 
-        //更新breaktimeCount
-        //判断breaktimeCount表中是否含有该年月的纪录
-        Long breaktimeCountId = breaktimeCountService.getSameUYMId(breaktime.getUser().getId(), breaktime.getYear(), breaktime.getMonth());
-        if (null != breaktimeCountId) {
-            //若有则更新
-            BreaktimeCount breaktimeCount = breaktimeCountService.getById(breaktimeCountId);
-            breaktimeCount.setHours(breaktimeCount.getHours() + breaktime.getDuration());
-            breaktimeCountService.update(breaktimeCount);
-        } else {
-            //若无则添加
-            BreaktimeCount breaktimeCount = new BreaktimeCount(breaktime.getYear(), breaktime.getMonth(), breaktime.getDuration(), breaktime.getUser());
-            breaktimeCountService.save(breaktimeCount);
-        }
         return "redirect:/breaktime/list";
     }
     @RequestMapping("/addUI")
@@ -101,11 +86,6 @@ public class BreaktimeController extends BaseAction {
     public String edit(Breaktime breaktime, HttpServletRequest request){
         Breaktime breaktimeInDatabase = breaktimeService.getById(breaktime.getId());
 
-        //更新breaktimeCount表中数据
-        Long breaktimeCountId = breaktimeCountService.getSameUYMId(breaktime.getUser().getId(), breaktime.getYear(), breaktime.getMonth());
-        BreaktimeCount breaktimeCount = breaktimeCountService.getById(breaktimeCountId);
-        breaktimeCount.setHours(breaktimeCount.getHours() - breaktimeInDatabase.getDuration() + breaktime.getDuration());
-        breaktimeCountService.update(breaktimeCount);
 
         //更新breaktime表中数据
         breaktimeInDatabase.setUser(userService.getById(breaktime.getUserId()));

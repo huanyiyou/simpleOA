@@ -40,6 +40,7 @@ public class TimeHandler {
     }
 
     public static Double getHoursByTimeSpan(String timeSpan) {
+        DecimalFormat df = new DecimalFormat("#.###");
         int hours = 0;
         int minutes = 0;
         String temp = timeSpan.replace("小时", "/").replace("分钟", "/");
@@ -48,7 +49,8 @@ public class TimeHandler {
             hours = Integer.parseInt(hm[0]);
             minutes = Integer.parseInt(hm[1]);
         }
-        return hours + (Double)(Math.round((minutes/60.0)*1000)/1000.0);
+//        return hours + (Double)(Math.round((minutes/60.0)*1000)/1000.0);
+        return hours + Double.valueOf(df.format(minutes/60.0));
     }
 
     /**

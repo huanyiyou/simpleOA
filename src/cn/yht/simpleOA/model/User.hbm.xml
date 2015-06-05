@@ -38,11 +38,5 @@
 			<key column="userId"/>
 			<one-to-many class="Breaktime"/>
 		</set>
-
-		<!--overtimeCounts 属性，本类与 OvertimeCount 一对多-->
-		<set name="overtimeCounts">
-			<key column="userId"/>
-			<one-to-many class="OvertimeCount"/>
-		</set>
 	</class>
 </hibernate-mapping>

@@ -18,6 +18,18 @@ public class Breaktime implements Serializable{
 
     private User user;
 
+    public Breaktime() {
+    }
+
+    public Breaktime(String userName, User user, int duration, String date, String year, String month, String description) {
+        this.userName = userName;
+        this.duration = (double) duration;
+        this.date = date;
+        this.year = year;
+        this.month = month;
+        this.description = description;
+        this.user = user;
+    }
 
     public Long getId() {
         return id;

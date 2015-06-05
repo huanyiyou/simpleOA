@@ -8,4 +8,6 @@ import cn.yht.simpleOA.model.User;
  */
 public interface UserService extends DaoSupport<User>{
     User findByLoginNameAndPassword(String loginName, String password);
+
+    boolean hasSameLoginName(User user);
 }

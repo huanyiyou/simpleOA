@@ -29,10 +29,14 @@ public class UserController extends BaseAction {
     }
     @RequestMapping("/add")
     public String add(User  user){
-        user.setPassword(DigestUtils.md5Hex("111111"));
-        user.setRoles(new HashSet<>(roleService.getByIds(user.getRoleIds())));
-        userService.save(user);
-        return "redirect:/user/list";
+        if(userService.hasSameLoginName(user)){
+            return "redirect:userViews/saveUI";
+        }else {
+            user.setPassword(DigestUtils.md5Hex("111111"));
+            user.setRoles(new HashSet<>(roleService.getByIds(user.getRoleIds())));
+            userService.save(user);
+            return "redirect:/user/list";
+        }
     }
     @RequestMapping("/addUI")
     public String addUI(Model model){
@@ -78,16 +82,17 @@ public class UserController extends BaseAction {
     }
 
     @RequestMapping("/loginUI")
-    public String loginUI(){
+    public String loginUI(Model model){
+        model.addAttribute("message", "");
         return "/userViews/loginUI";
     }
 
     @RequestMapping("/login")
-    public String login(@RequestParam("loginName") String loginName, @RequestParam("password") String password, HttpSession session){
+    public String login(@RequestParam("loginName") String loginName, @RequestParam("password") String password, HttpSession session, Model model){
         User userInDatabase = userService.findByLoginNameAndPassword(loginName, password);
         if(null == userInDatabase){
-
-            return "redirect:/user/loginUI";
+            model.addAttribute("message", "用户名或密码错误");
+            return "/userViews/loginUI";
 
         }else {
             session.setAttribute("user", userInDatabase);

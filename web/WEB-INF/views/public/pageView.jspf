@@ -51,7 +51,7 @@
     <script>
         function gotoPage(pageNum) {
 //        window.location.href = "/selfPreOvertime/list?pageNum=" + pageNum;
-//            document.forms[0].pageNum.value = pageNum;
+            document.forms[0].pageNum.value = pageNum;
 //        $(document.forms[0]).append("<input hidden='hidden' name='pageNum' value='"+ pageNum +"'/>");
             document.forms[0].submit();
         }

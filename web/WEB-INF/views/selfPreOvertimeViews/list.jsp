@@ -3,7 +3,7 @@
 <%@include file="/WEB-INF/views/public/commons.jspf" %>
 <html>
 <head>
-    <title>申请加班记录列表</title>
+    <title>加班申请</title>
 </head>
 <body>
 
@@ -12,7 +12,7 @@
         <div id="Title_Head"></div>
         <div id="Title"><!--页面标题-->
             <img border="0" width="13" height="13"
-                 src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 申请加班记录列表
+                 src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 加班申请
         </div>
         <div id="Title_End"></div>
     </div>

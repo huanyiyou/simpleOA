@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>个人数据统计</title>
+  <title>统计表</title>
   <%@include file="/WEB-INF/views/public/commons.jspf" %>
 </head>
 <body>
@@ -9,12 +9,12 @@
   <div id="Title_bar_Head">
     <div id="Title_Head"></div>
     <div id="Title"><!--页面标题-->
-      <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 个人统计表
+      <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 统计表
     </div>
     <div id="Title_End"></div>
   </div>
 </div>
-<form action="/chart/user">
+<form action="/stats/user">
   年：
   <select name="year">
     <option value="0">——请选择年份——</option>
@@ -39,6 +39,12 @@
       <td>${overtimes[status.index]-breaktimes[status.index]}</td>
     </tr>
   </c:forEach>
+  <tr>
+    <th>年度总和</th>
+    <td>${overtimeSum}</td>
+    <td>${breaktimeSum}</td>
+    <td>${yearResult}</td>
+  </tr>
 </table>
 
 </body>

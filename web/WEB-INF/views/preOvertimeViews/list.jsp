@@ -2,7 +2,7 @@
 <%@include file="/WEB-INF/views/public/commons.jspf"%>
 <html>
 <head>
-  <title>申请加班记录列表</title>
+  <title>申请加班列表</title>
 </head>
 <body>
 
@@ -10,7 +10,7 @@
   <div id="Title_bar_Head">
     <div id="Title_Head"></div>
     <div id="Title"><!--页面标题-->
-      <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 申请加班记录列表
+      <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/style/images/title_arrow.gif"/> 申请加班列表
     </div>
     <div id="Title_End"></div>
   </div>
@@ -109,6 +109,7 @@
           <c:if test="${sessionScope.user.hasPrivilegeByUrl('/preOvertime/approve')}">
             <a href="/preOvertime/approve?id=${preOvertime.id}" onclick="return confirm('确定要通过吗?')">通过</a>
           </c:if>
+          ||
           <c:if test="${sessionScope.user.hasPrivilegeByUrl('/preOvertime/deny')}">
             <a href="/preOvertime/deny?id=${preOvertime.id}" onclick="return confirm('确定要拒绝吗?')">拒绝</a>
           </c:if>

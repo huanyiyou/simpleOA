@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>部门数据统计</title>
+  <title>部门统计表</title>
   <%@include file="/WEB-INF/views/public/commons.jspf" %>
 
 </head>
@@ -15,11 +15,11 @@
     <div id="Title_End"></div>
   </div>
 </div>
-<form action="/chart/department">
+<form action="/stats/department">
   年：
   <select name="year">
+    <option value="0">——请选择年份——</option>
     <c:forEach items="${years}" var="y">
-      <option value="0">——请选择年份——</option>
       <option value="${y}" <c:if test="${y == year}">selected</c:if>>${y}</option>
     </c:forEach>
   </select>
@@ -47,6 +47,12 @@
       <td>${overtimes[status.index]-breaktimes[status.index]}</td>
     </tr>
   </c:forEach>
+  <tr>
+    <th>年度总和</th>
+    <td>${overtimeSum}</td>
+    <td>${breaktimeSum}</td>
+    <td>${yearResult}</td>
+  </tr>
 </table>
 
 </body>
