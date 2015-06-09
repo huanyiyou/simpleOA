@@ -26,8 +26,11 @@ import java.util.List;
 public class SelfOvertimeController extends BaseAction {
     @RequestMapping("/list")
     public String list(HttpServletRequest request, Model model,
-                       Integer pageNum, String year, String month){
-        if(pageNum == null){
+                       Integer pageNum, String year, String month, Integer pageSize){
+        if(null == pageSize){
+            pageSize = 15;
+        }
+        if(null == pageNum){
             pageNum = 1;
         }
         if(year == null){
@@ -45,7 +48,8 @@ public class SelfOvertimeController extends BaseAction {
                 .addCondition("o.user.id = :id", ((User) request.getSession().getAttribute("user")).getId())
                 .addCondition("o.year LIKE :year", "%" + year + "%")
                 .addCondition("o.month LIKE :month","%"+ month+"%")
-                .preparePageBean(overtimeService, pageNum, model);
+                .addOrderProperty("o.date", false)
+                .preparePageBean(overtimeService, pageNum, model, pageSize);
         model.addAttribute("year", year);
         model.addAttribute("years", TimeHandler.getYears());
         model.addAttribute("month", month);

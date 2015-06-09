@@ -23,9 +23,12 @@ import java.util.List;
 public class BreaktimeController extends BaseAction {
     @RequestMapping("/list")
     public String list(HttpServletRequest request, Model model,
-                       Integer pageNum, String year, String month, Long userId){
+                       Integer pageNum, String year, String month, Long userId, Integer pageSize){
         String userName;
-        if(pageNum == null){
+        if(null == pageSize){
+            pageSize = 15;
+        }
+        if(null == pageNum){
             pageNum = 1;
         }
         if(null == year || "".equals(year)){
@@ -54,9 +57,10 @@ public class BreaktimeController extends BaseAction {
         parametersKey.add("userName");
         new QueryHelper(Breaktime.class, "b", parametersKey)
                 .addCondition("b.year LIKE :year","%"+year+"%")
-                .addCondition("b.month LIKE :month","%"+ month+"%")
+                .addCondition("b.month LIKE :month", "%" + month + "%")
                 .addCondition("b.userName LIKE :userName" ,"%"+ userName+"%")
-                .preparePageBean(overtimeService, pageNum, model);
+                .addOrderProperty("b.date", false)
+                .preparePageBean(overtimeService, pageNum, model, pageSize);
         model.addAttribute("year", year);
         model.addAttribute("years", TimeHandler.getYears());
         model.addAttribute("month", month);

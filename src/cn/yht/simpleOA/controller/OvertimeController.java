@@ -28,9 +28,12 @@ import java.util.List;
 public class OvertimeController extends BaseAction {
     @RequestMapping("/list")
     public String list(HttpServletRequest request, Model model,
-                       Integer pageNum, String year, String month, Long userId){
+                       Integer pageNum, String year, String month, Long userId, Integer pageSize){
         String userName;
-        if(pageNum == null){
+        if(null == pageSize){
+            pageSize = 15;
+        }
+        if(null == pageNum){
             pageNum = 1;
         }
         if(null == year || "".equals(year)){
@@ -60,9 +63,10 @@ public class OvertimeController extends BaseAction {
         parametersKey.add("userName");
         new QueryHelper(Overtime.class, "o", parametersKey)
                 .addCondition("o.year LIKE :year","%"+year+"%")
-                .addCondition("o.month LIKE :month","%"+ month+"%")
+                .addCondition("o.month LIKE :month", "%" + month + "%")
                 .addCondition("o.userName LIKE :userName" ,"%"+ userName+"%")
-                .preparePageBean(overtimeService, pageNum, model);
+                .addOrderProperty("o.date", false)
+                .preparePageBean(overtimeService, pageNum, model, pageSize);
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("year", year);
         model.addAttribute("years", TimeHandler.getYears());

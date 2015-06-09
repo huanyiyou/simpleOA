@@ -17,7 +17,8 @@
 </div>
 <div>
   <form action="/preOvertime/list">
-    <input hidden="hidden" name="pageNum" value="${pageNum}"/>
+    <input hidden="hidden" name="pageNum"/>
+    <input hidden="hidden" name="pageSize"/>
     年：
     <select name="year">
       <option value="" <c:if test="${year == ''}">selected</c:if>>所有年份</option>
@@ -47,7 +48,7 @@
 
     <!-- 表头-->
     <tr>
-      <th>加班记录id</th>
+      <th>序号</th>
       <th>日期</th>
       <th>工作日、双休日、国定假日</th>
       <th>开始时间</th>
@@ -60,10 +61,10 @@
     </tr>
 
     <!--显示数据列表-->
-    <c:forEach items="${pageBean.recordList}" var="preOvertime">
+    <c:forEach items="${pageBean.recordList}" var="preOvertime" varStatus="status">
       <tr>
         <td>
-            ${preOvertime.id}
+            ${pageBean.pageSize*(pageBean.currentPage-1)+status.count}
         </td>
         <td>
             ${preOvertime.date}

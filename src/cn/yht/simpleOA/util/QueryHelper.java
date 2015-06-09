@@ -107,8 +107,8 @@ public class QueryHelper {
      * @param model
      */
 
-    public void preparePageBean(DaoSupport<?> service, int pageNum, Model model){
-        PageBean pageBean = service.getPageBean(pageNum, 10, this, this.getParametersKey());
+    public void preparePageBean(DaoSupport<?> service, int pageNum, Model model, int pageSize){
+        PageBean pageBean = service.getPageBean(pageNum, pageSize, this, this.getParametersKey());
         model.addAttribute("pageBean", pageBean);
     }
 }

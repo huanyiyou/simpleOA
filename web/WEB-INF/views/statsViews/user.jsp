@@ -45,6 +45,12 @@
     <td>${breaktimeSum}</td>
     <td>${yearResult}</td>
   </tr>
+  <tr>
+    <th>所有记录总和</th>
+    <td>${overtimeAllSum}</td>
+    <td>${breaktimeAllSum}</td>
+    <td>${allResult}</td>
+  </tr>
 </table>
 
 </body>

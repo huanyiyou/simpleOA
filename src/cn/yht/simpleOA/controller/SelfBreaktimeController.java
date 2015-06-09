@@ -23,8 +23,11 @@ import java.util.List;
 public class SelfBreaktimeController extends BaseAction {
     @RequestMapping("/list")
     public String list(HttpServletRequest request, Model model,
-                       Integer pageNum, String year, String month){
-        if(pageNum == null){
+                       Integer pageNum, String year, String month, Integer pageSize){
+        if(null == pageSize){
+            pageSize = 15;
+        }
+        if(null == pageNum){
             pageNum = 1;
         }
         if(null == year || "".equals(year)){
@@ -41,7 +44,8 @@ public class SelfBreaktimeController extends BaseAction {
                 .addCondition("b.user.id = :id", ((User) request.getSession().getAttribute("user")).getId())
                 .addCondition("b.year LIKE :year", "%" + year + "%")
                 .addCondition("b.month LIKE :month", "%" + month + "%")
-                .preparePageBean(overtimeService, pageNum, model);
+                .addOrderProperty("b.date", false)
+                .preparePageBean(overtimeService, pageNum, model, pageSize);
         model.addAttribute("year", year);
         model.addAttribute("years", TimeHandler.getYears());
         model.addAttribute("month", month);

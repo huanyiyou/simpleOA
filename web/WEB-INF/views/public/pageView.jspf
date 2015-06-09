@@ -4,7 +4,14 @@
 <div id=PageSelectorBar>
     <div id=PageSelectorMemo>
         页次：${pageBean.currentPage}/${pageBean.pageCount}页 &nbsp;
-        每页显示：${pageBean.pageSize}条 &nbsp;
+        每页显示：
+        <select onchange="gotoPage(1)" id="_pz">
+            <option value="10" <c:if test="${pageBean.pageSize == 10}">selected</c:if>>10</option>
+            <option value="15" <c:if test="${pageBean.pageSize == 15}">selected</c:if>>15</option>
+            <option value="20" <c:if test="${pageBean.pageSize == 20}">selected</c:if>>20</option>
+            <option value="25" <c:if test="${pageBean.pageSize == 25}">selected</c:if>>25</option>
+            <option value="30" <c:if test="${pageBean.pageSize == 30}">selected</c:if>>30</option>
+        </select>&nbsp;
         总记录数：${pageBean.recordCount}条
     </div>
 </div>
@@ -47,11 +54,13 @@
 
     <script>
         $("#_pn").val("${pageBean.currentPage}");
+        $("#_pz").val("${pageBean.pageSize}");
     </script>
     <script>
-        function gotoPage(pageNum) {
+        function gotoPage(pageNum, pageSize) {
 //        window.location.href = "/selfPreOvertime/list?pageNum=" + pageNum;
             document.forms[0].pageNum.value = pageNum;
+            document.forms[0].pageSize.value = $("#_pz").val();
 //        $(document.forms[0]).append("<input hidden='hidden' name='pageNum' value='"+ pageNum +"'/>");
             document.forms[0].submit();
         }

@@ -14,4 +14,6 @@ public interface OvertimeService extends DaoSupport<Overtime> {
     double[] getSumByUserIdAndYear(Long userId, String year);
 
     double[] getSumByYear(String year);
+
+    double[] getSumByUserId(Long userId);
 }

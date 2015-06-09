@@ -33,10 +33,13 @@ public class SelfPreOvertimeController extends BaseAction {
 
     @RequestMapping("/list")
     public String list(HttpServletRequest request, Model model,
-                        Integer pageNum, String year, String month, String approved) {
+                        Integer pageNum, String year, String month, String approved, Integer pageSize) {
 //        List<PreOvertime> selfPreOvertimeList = preOvertimeService.findAllByUserId(((User) request.getSession().getAttribute("user")).getId());
 //        return new ModelAndView("selfPreOvertimeViews/list", "selfPreOvertimeList", selfPreOvertimeList);
-        if(pageNum == null){
+        if(null == pageSize){
+            pageSize = 15;
+        }
+        if(null == pageNum){
             pageNum = 1;
         }
         if(year == null){
@@ -59,10 +62,11 @@ public class SelfPreOvertimeController extends BaseAction {
         parametersKey.add("approved");
         new QueryHelper(PreOvertime.class, "p", parametersKey)
                 .addCondition("p.user.id = :id", ((User) request.getSession().getAttribute("user")).getId())
-                .addCondition("p.year LIKE :year","%"+year+"%")
+                .addCondition("p.year LIKE :year", "%" + year + "%")
                 .addCondition("p.month LIKE :month","%"+ month+"%")
                 .addCondition(!approved.equals(""),"p.approved = :approved", approved.equals("1"))
-                .preparePageBean(preOvertimeService, pageNum, model);
+                .addOrderProperty("p.date", false)
+                .preparePageBean(preOvertimeService, pageNum, model, pageSize);
         model.addAttribute("approved",approved);
         model.addAttribute("year", year);
         model.addAttribute("years", TimeHandler.getYears());

@@ -16,7 +16,8 @@
   </div>
 </div>
 <form action="/breaktime/list">
-  <input hidden="hidden" name="pageNum" value="1"/>
+  <input hidden="hidden" name="pageNum"/>
+  <input hidden="hidden" name="pageSize"/>
   年：
   <select name="year">
     <option value="" <c:if test="${year == ''}">selected</c:if>>所有年份</option>
@@ -48,7 +49,7 @@
 
     <!-- 表头-->
     <tr align="CENTER" valign="MIDDLE" id="TableTitle">
-      <th>休假记录id</th>
+      <th>序号</th>
       <th>使用人</th>
       <th>时长</th>
       <th>日期</th>
@@ -57,10 +58,10 @@
     </tr>
 
     <!--显示数据列表-->
-    <c:forEach items="${pageBean.recordList}" var="breaktime">
+    <c:forEach items="${pageBean.recordList}" var="breaktime" varStatus="status">
       <tr>
         <td>
-            ${breaktime.id}
+            ${pageBean.pageSize*(pageBean.currentPage-1)+status.count}
         </td>
         <td>
             ${breaktime.userName}

@@ -39,8 +39,8 @@ public class TimeHandler {
         }
     }
 
-    public static Double getHoursByTimeSpan(String timeSpan) {
-        DecimalFormat df = new DecimalFormat("#.###");
+    public static double getHoursByTimeSpan(String timeSpan) {
+
         int hours = 0;
         int minutes = 0;
         String temp = timeSpan.replace("小时", "/").replace("分钟", "/");
@@ -50,7 +50,7 @@ public class TimeHandler {
             minutes = Integer.parseInt(hm[1]);
         }
 //        return hours + (Double)(Math.round((minutes/60.0)*1000)/1000.0);
-        return hours + Double.valueOf(df.format(minutes/60.0));
+        return hours + minutes/60.0;
     }
 
     /**
@@ -65,6 +65,10 @@ public class TimeHandler {
         return years;
     }
 
+    /**
+     * 返回一个1-12月份的字符串list
+     * @return
+     */
     public static List<String> getMonths(){
         List<String> months = new ArrayList<>();
         for(int i = 1 ; i<= 12 ; i++){
@@ -77,4 +81,20 @@ public class TimeHandler {
         return months;
     }
 
+    public static double[] getRoundArray(double[] val){
+        DecimalFormat df = new DecimalFormat("#.###");
+        for(int i = 0 ; i < val.length ; i++){
+            val[i] = Double.parseDouble(df.format(val[i]));
+        }
+        return val;
+    }
+
+    public static double getArraySum(double[] val){
+        DecimalFormat df = new DecimalFormat("#.###");
+        double result = 0;
+        for(double d : val){
+            result += d;
+        }
+        return Double.parseDouble(df.format(result));
+    }
 }

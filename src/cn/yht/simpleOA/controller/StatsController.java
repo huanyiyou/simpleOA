@@ -1,6 +1,8 @@
 package cn.yht.simpleOA.controller;
 
 import cn.yht.simpleOA.base.BaseAction;
+import cn.yht.simpleOA.model.Breaktime;
+import cn.yht.simpleOA.model.Overtime;
 import cn.yht.simpleOA.model.User;
 import cn.yht.simpleOA.util.TimeHandler;
 import org.springframework.context.annotation.Scope;
@@ -39,19 +41,23 @@ public class StatsController extends BaseAction {
         model.addAttribute("overtimes", overtimes);
         model.addAttribute("breaktimes", breaktimes);
 
-        //计算年度数据
-        double overtimeSum = 0.0;
-        double breaktimeSum = 0.0;
-        for(double ot :overtimes){
-            overtimeSum += ot;
-        }
-        for(double bt : breaktimes){
-            breaktimeSum += bt;
-        }
+        //分月记录
+        model.addAttribute("overtimes", overtimes);
+        model.addAttribute("breaktimes", breaktimes);
 
-        model.addAttribute("overtimeSum", df.format(overtimeSum));
-        model.addAttribute("breaktimeSum", df.format(breaktimeSum));
-        model.addAttribute("yearResult", df.format(overtimeSum - breaktimeSum));
+        //年度统计
+        model.addAttribute("overtimeSum", TimeHandler.getArraySum(overtimes));
+        model.addAttribute("breaktimeSum", TimeHandler.getArraySum(breaktimes));
+        model.addAttribute("yearResult", TimeHandler.getArraySum(overtimes) - TimeHandler.getArraySum(breaktimes));
+
+        //所有记录统计
+        double allOvertimeSum = TimeHandler.getArraySum(overtimeService.getSumByUserId(userId));
+        double allBreaktimeSum = TimeHandler.getArraySum(breaktimeService.getSumByUserId(userId));
+        String allLeft = df.format(allOvertimeSum - allBreaktimeSum);
+        model.addAttribute("overtimeAllSum", allOvertimeSum);
+        model.addAttribute("breaktimeAllSum", allBreaktimeSum);
+        model.addAttribute("allResult", allLeft);
+
         model.addAttribute("userId", userId);
         model.addAttribute("users", users);
         model.addAttribute("year", year);
@@ -71,26 +77,23 @@ public class StatsController extends BaseAction {
         overtimes = overtimeService.getSumByUserIdAndYear(userId, year);
         breaktimes = breaktimeService.getSumByUserIdAndYear(userId, year);
 
+        //分月记录
         model.addAttribute("overtimes", overtimes);
         model.addAttribute("breaktimes", breaktimes);
 
-        //计算年度数据
-        Double overtimeSum = 0.0;
-        Double breaktimeSum = 0.0;
-        for(Double ot :overtimes){
-            if(null != ot){
-                overtimeSum += ot;
-            }
-        }
-        for(Double bt : breaktimes){
-            if(null != bt){
-                breaktimeSum += bt;
-            }
-        }
+        //年度统计
+        model.addAttribute("overtimeSum", TimeHandler.getArraySum(overtimes));
+        model.addAttribute("breaktimeSum", TimeHandler.getArraySum(breaktimes));
+        model.addAttribute("yearResult", TimeHandler.getArraySum(overtimes) - TimeHandler.getArraySum(breaktimes));
 
-        model.addAttribute("overtimeSum", df.format(overtimeSum));
-        model.addAttribute("breaktimeSum", df.format(breaktimeSum));
-        model.addAttribute("yearResult", df.format(overtimeSum - breaktimeSum));
+        //所有记录统计
+        double allOvertimeSum = TimeHandler.getArraySum(overtimeService.getSumByUserId(userId));
+        double allBreaktimeSum = TimeHandler.getArraySum(breaktimeService.getSumByUserId(userId));
+        String allLeft = df.format(allOvertimeSum - allBreaktimeSum);
+        model.addAttribute("overtimeAllSum", allOvertimeSum);
+        model.addAttribute("breaktimeAllSum", allBreaktimeSum);
+        model.addAttribute("allResult", allLeft);
+
         model.addAttribute("year", year);
         model.addAttribute("years", TimeHandler.getYears());
         return "/statsViews/user";

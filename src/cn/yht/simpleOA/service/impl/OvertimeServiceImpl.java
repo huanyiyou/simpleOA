@@ -7,6 +7,9 @@ import cn.yht.simpleOA.util.TimeHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 
 /**
@@ -15,7 +18,6 @@ import java.util.List;
 @Service
 @Transactional
 public class OvertimeServiceImpl extends DaoSupportImpl<Overtime>  implements OvertimeService {
-
     @Override
     public List<Overtime> findAllByUserId(Long userId) {
         return getSession().createQuery(
@@ -31,19 +33,7 @@ public class OvertimeServiceImpl extends DaoSupportImpl<Overtime>  implements Ov
                 .setParameter("userId", userId)
                 .setParameter("year", year)
                 .list();
-        double[] result = new double[12];
-        if (overtimes.size() > 0) {
-            for (Overtime o : overtimes) {
-                if (o.getMonth().startsWith("0")) {
-                    int index = Integer.parseInt(o.getMonth().substring(1)) - 1;
-                    result[index] += TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
-                } else {
-                    int index = Integer.parseInt(o.getMonth()) - 1;
-                    result[index] += TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
-                }
-            }
-        }
-        return result;
+        return getArrayByListMonthly(overtimes);
     }
 
     @Override
@@ -52,18 +42,33 @@ public class OvertimeServiceImpl extends DaoSupportImpl<Overtime>  implements Ov
                 "FROM Overtime o WHERE o.year = :year")
                 .setParameter("year", year)
                 .list();
+        return getArrayByListMonthly(overtimes);
+    }
+
+    @Override
+    public double[] getSumByUserId(Long userId) {
+        List<Overtime> overtimes = getSession().createQuery(
+                "FROM Overtime o WHERE o.user.id = :userId")
+                .setParameter("userId", userId)
+                .list();
+        return getArrayByListMonthly(overtimes);
+    }
+
+    protected double[] getArrayByListMonthly(List<Overtime> overtimes){
         double[] result = new double[12];
         if (overtimes.size() > 0) {
             for (Overtime o : overtimes) {
+                double val = TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
                 if (o.getMonth().startsWith("0")) {
                     int index = Integer.parseInt(o.getMonth().substring(1)) - 1;
-                    result[index] += TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
+                    result[index] += val;
                 } else {
                     int index = Integer.parseInt(o.getMonth()) - 1;
-                    result[index] += TimeHandler.getHoursByTimeSpan(o.getTimeSpan());
+                    result[index] += val;
                 }
             }
         }
-        return result;
+        return TimeHandler.getRoundArray(result);
     }
+
 }

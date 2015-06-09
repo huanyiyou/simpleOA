@@ -26,9 +26,12 @@ import java.util.List;
 public class PreOvertimeController extends BaseAction {
     @RequestMapping("/list")
     public String list(HttpServletRequest request, Model model,
-                       Integer pageNum, String year, String month, Long userId) {
+                       Integer pageNum, String year, String month, Long userId, Integer pageSize) {
         String userName;
-        if(pageNum == null){
+        if(null == pageSize){
+            pageSize = 15;
+        }
+        if(null == pageNum){
             pageNum = 1;
         }
         if(null == year || "".equals(year)){
@@ -58,10 +61,11 @@ public class PreOvertimeController extends BaseAction {
         parametersKey.add("userName");
         new QueryHelper(PreOvertime.class, "p", parametersKey)
                 .addCondition("p.year LIKE :year","%"+year+"%")
-                .addCondition("p.month LIKE :month","%"+ month+"%")
+                .addCondition("p.month LIKE :month", "%" + month + "%")
                 .addCondition("p.userName LIKE :userName" ,"%"+ userName+"%")
                 .addCondition("p.submitted = true")
-                .preparePageBean(preOvertimeService, pageNum, model);
+                .addOrderProperty("p.date", false)
+                .preparePageBean(preOvertimeService, pageNum, model, pageSize);
         model.addAttribute("year", year);
         model.addAttribute("years", TimeHandler.getYears());
         model.addAttribute("month", month);
