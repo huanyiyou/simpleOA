@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/WEB-INF/views/public/commons.jspf"%>
+<%@include file="/WEB-INF/views/public/tablecloth.jspf" %>
 <html>
 <head>
   <title>休假记录列表</title>

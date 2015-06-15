@@ -3,6 +3,7 @@
 <head>
   <title>统计表</title>
   <%@include file="/WEB-INF/views/public/commons.jspf" %>
+  <%@include file="/WEB-INF/views/public/tablecloth.jspf" %>
 </head>
 <body>
 <div id="Title_bar">

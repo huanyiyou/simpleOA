@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/WEB-INF/views/public/commons.jspf"%>
+<%@include file="/WEB-INF/views/public/tablecloth.jspf" %>
 <html>
 <head>
   <title>申请加班列表</title>
